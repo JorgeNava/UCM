@@ -2,13 +2,14 @@
   "scripts": {
     "start": "vercel dev",
     "deploy": "vercel",
-    "test": "bun wipest ./api/main.test.ts"
+    "test": "bun wipest ./main.test.ts"
   },
   "dependencies": {
     "bun": "^1.0.2",
     "hono": "^3.6.0"
   },
   "devDependencies": {
+    "bun-types": "^1.0.2",
     "vercel": "^32.2.5"
   }
 }
