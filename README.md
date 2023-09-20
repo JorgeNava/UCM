@@ -1,1 +1,4 @@
-# UCM
+```
+npm install
+npm run start
+```

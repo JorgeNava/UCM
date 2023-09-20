@@ -1,14 +1,14 @@
 {
-  "name": "ucm",
-  "module": "index.ts",
-  "type": "module",
   "scripts": {
-    "start": "bun run index.ts"
+    "start": "vercel dev",
+    "deploy": "vercel",
+    "test": "bun wipest ./api/main.test.ts"
+  },
+  "dependencies": {
+    "bun": "^1.0.2",
+    "hono": "^3.6.0"
   },
   "devDependencies": {
-    "bun-types": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
+    "vercel": "^32.2.5"
   }
 }
