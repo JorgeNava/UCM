@@ -1,13 +1,20 @@
-import axios from 'axios';
+const axios = require('axios')
 
-export default async function postShopifyProduct(productInput) {
+module.exports = async function updateShopifyProductPrice(productUpdate) {
     let data = {
-        query: `mutation productCreate($input: ProductInput!) {
-            productCreate(input: $input) {
+        query: `mutation productVariantUpdate($input: ProductVariantInput!) {
+            productVariantUpdate(input: $input) {
                 product {
                     id
                     title
-                    descriptionHtml
+                    variants(first: 1) {
+                        edges {
+                            node {
+                                id
+                                title
+                            }
+                        }
+                    }
                 }
                 userErrors {
                     field
@@ -16,7 +23,7 @@ export default async function postShopifyProduct(productInput) {
             }
         }`,
         variables: {
-            input: productInput
+            input: productUpdate
         }
     };
 
@@ -32,7 +39,7 @@ export default async function postShopifyProduct(productInput) {
         data : data
     };
     
-    console.log('Creating Shopify product');
+    console.log('Updating Shopify product price');
     const resp = await axios.request(config);
     return resp?.data;
 }

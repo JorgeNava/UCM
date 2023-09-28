@@ -2,8 +2,12 @@
   "port": 8000,
   "shopify": {
     "enabled": true,
+    "storeDomain": "",
     "api": {
-      "url": "hola.com"
+      "graphql": {
+        "accesToken": "",
+        "endpoint": ""
+      }
     }
   },
   "features": {
@@ -15,6 +19,7 @@
       "enabled": true,
       "pullEnabled": true,
       "api": {
+        "clientId": "73777",
         "url": "hola.com"
       }
     },

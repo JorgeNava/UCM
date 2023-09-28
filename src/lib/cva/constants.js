@@ -1,4 +1,0 @@
-export const BY_BRANCH = 1;
-export const BY_DISTRIBUTION_CENTER = 2;
-export const BY_BRANCH_AND_DISTRIBUTION_CENTER = 3;
-export const BY_BRANCH_OR_DISTRIBUTION_CENTER = 4;

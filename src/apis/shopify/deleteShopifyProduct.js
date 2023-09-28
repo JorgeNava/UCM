@@ -1,21 +1,10 @@
-import axios from 'axios';
+const axios = require('axios')
 
-export default async function updateShopifyProductPrice(productUpdate) {
+module.exports = async function deleteShopifyProduct(productId) {
     let data = {
-        query: `mutation productVariantUpdate($input: ProductVariantInput!) {
-            productVariantUpdate(input: $input) {
-                product {
-                    id
-                    title
-                    variants(first: 1) {
-                        edges {
-                            node {
-                                id
-                                title
-                            }
-                        }
-                    }
-                }
+        query: `mutation productDelete($input: ProductDeleteInput!) {
+            productDelete(input: $input) {
+                deletedProductId
                 userErrors {
                     field
                     message
@@ -23,7 +12,7 @@ export default async function updateShopifyProductPrice(productUpdate) {
             }
         }`,
         variables: {
-            input: productUpdate
+            input: productId
         }
     };
 
@@ -39,7 +28,7 @@ export default async function updateShopifyProductPrice(productUpdate) {
         data : data
     };
     
-    console.log('Updating Shopify product price');
+    console.log('Deleting Shopify product');
     const resp = await axios.request(config);
     return resp?.data;
 }

@@ -1,6 +1,6 @@
-import axios from 'axios';
+const axios = require('axios')
 
-export default async function updateShopifyProducts(productUpdate) {
+module.exports = async function updateShopifyProducts(productUpdate) {
     let data = {
         query: `mutation productUpdate($input: ProductInput!) {
             productUpdate(input: $input) {

@@ -6,20 +6,25 @@ const { pullSupplierProducts } = require('./utils/pullSuppliers');
 const CvaAdapter = require('./adapters/cva.js');
 const OtherAdapter = require('./adapters/other.js');
 
-//const cvaRouter = require('./routes/cvaRoutes.js');
+const cvaRouter = require('./routes/cva.js');
+const shopifyRouter = require('./routes/shopify.js');
 
 module.exports = function () {
   const app = express();
 
   app.use(bodyParser.json());
 
-  // TODO: DEFINE ROUTERS/CONTROLLERS/SERVICES CORRECTLY
-  // if (cvaConfig?.enabled) {
-  //   app.use('/cva', cvaRouter(database, api));
-  // }
-
+  const shopifyConfig = configProvider.get('shopify');
   const cvaConfig = configProvider.get('suppliers.cva');
   const otherConfig = configProvider.get('suppliers.other');
+
+  if (shopifyConfig?.enabled) {
+    app.use('/shopify', shopifyRouter());
+  }
+
+  if (cvaConfig?.enabled) {
+    app.use('/cva', cvaRouter());
+  }
 
   app.get('/pullAllProducts', async (req, res) => {
     const cvaProducts = await pullSupplierProducts(cvaConfig, CvaAdapter);

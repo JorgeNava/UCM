@@ -1,10 +1,14 @@
-import axios from 'axios';
+const axios = require('axios')
 
-export default async function deleteShopifyProduct(productId) {
+module.exports = async function postShopifyProduct(productInput) {
     let data = {
-        query: `mutation productDelete($input: ProductDeleteInput!) {
-            productDelete(input: $input) {
-                deletedProductId
+        query: `mutation productCreate($input: ProductInput!) {
+            productCreate(input: $input) {
+                product {
+                    id
+                    title
+                    descriptionHtml
+                }
                 userErrors {
                     field
                     message
@@ -12,7 +16,7 @@ export default async function deleteShopifyProduct(productId) {
             }
         }`,
         variables: {
-            input: productId
+            input: productInput
         }
     };
 
@@ -28,7 +32,7 @@ export default async function deleteShopifyProduct(productId) {
         data : data
     };
     
-    console.log('Deleting Shopify product');
+    console.log('Creating Shopify product');
     const resp = await axios.request(config);
     return resp?.data;
 }
