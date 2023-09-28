@@ -1,0 +1,30 @@
+{
+  "port": 8000,
+  "shopify": {
+    "enabled": true,
+    "api": {
+      "url": "hola.com"
+    }
+  },
+  "features": {
+    "pullExceptions": []
+  },
+  "suppliers": {
+    "cva": {
+      "id": "cva",
+      "enabled": true,
+      "pullEnabled": true,
+      "api": {
+        "url": "hola.com"
+      }
+    },
+    "other": {
+      "id": "other",
+      "enabled": true,
+      "pullEnabled": true,
+      "api": {
+        "url": "hola.com"
+      }
+    }
+  }
+}

@@ -1,15 +1,23 @@
 {
+  "name": "ucm-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "vercel dev",
-    "deploy": "vercel",
-    "test": "bun wipest ./main.test.ts"
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "bun": "^1.0.2",
-    "hono": "^3.6.0"
-  },
-  "devDependencies": {
-    "bun-types": "^1.0.2",
-    "vercel": "^32.2.5"
+    "axios": "^1.4.0",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "helmet": "^7.0.0",
+    "mongoose": "^7.3.0",
+    "nodemon": "^2.0.22",
+    "xml2js": "^0.6.2"
   }
 }

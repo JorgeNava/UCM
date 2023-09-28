@@ -1,10 +1,17 @@
-```
-npm install
-npm run start
-```
+﻿# Unified-Catalog-Manager-API
 
-DOM types
-Unfortunately, setting a value for "types" means that TypeScript will ignore other global type definitions, including lib: ["dom"]. If you need to add DOM types into your project, add the following triple-slash directives at the top of any TypeScript file in your project.
+A REST API that manages shopify inventory and diverse product suppliers catalgs, it uses:
+  
+    Node.js
+    
+    Express.js
+    
+    Mongoose for database connection
+    
+    MVC architectural design
+    
+    Dependency Injection architectural design
+  
+    Clean Code architectural design
 
-/// <reference lib="dom" />
-/// <reference lib="dom.iterable" />
+To run server user 'npm run dev', which will start de Nodemon server.
