@@ -8,6 +8,11 @@ module.exports = function () {
     const RET_VAL = await ShopifyController.getProducts();
     res.send(RET_VAL);
   });
+
+  router.post('/product', async (req, res) => {
+    const RET_VAL = await ShopifyController.postProduct();
+    res.send(RET_VAL);
+  });
   
   return router;
 };

@@ -34,7 +34,8 @@ class CvaAPI {
     console.log('Getting CVA price list...');
     
     const cvaClientId = configProvider.get('suppliers.cva.api.clientId');
-    const config = this.config;
+    const config = structuredClone(this.config);
+
     config.url = config.baseUrl + `/lista_precios.xml?cliente=${cvaClientId}&exist=${exist}`;
     delete config.baseUrl;
 

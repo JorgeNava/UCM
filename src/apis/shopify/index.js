@@ -10,14 +10,13 @@ const deleteShopifyProduct = require('./deleteShopifyProduct.js');
 
 class ShopifyApi {
   constructor() {
-    const shopifyStoreDomain = configProvider.get('shopify.storeDomain');
     const shopifyGraphQlEndpoint = configProvider.get('shopify.api.graphql.endpoint');
     const shopifyApiAccessToken = configProvider.get('shopify.api.graphql.accesToken');
 
     this.config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: `https://${shopifyStoreDomain}/admin/${shopifyGraphQlEndpoint}`,
+      url: shopifyGraphQlEndpoint,
       headers: {
         'X-Shopify-Access-Token': shopifyApiAccessToken,
         'Content-Type': 'application/json'
@@ -26,7 +25,7 @@ class ShopifyApi {
   }
 
   async getProducts(quantity = 10) {
-    const config = this.config;
+    const config = structuredClone(this.config);
     config.data = JSON.stringify({
       query: `{
               products(first: ${quantity}) {
@@ -37,14 +36,11 @@ class ShopifyApi {
                   }
               }
           }`,
-      // TODO: MAYBE PUT ACTUAL VARIABLES HERE, MUST UPDATE QUERY
-      variables: {}
     });
 
     console.log('Getting Shopify products...');
     return await axios.request(config)
       .then((response) => {
-        console.log('[NAVA] response', response);
         return response.data;
       })
       .catch((error) => {
@@ -52,19 +48,46 @@ class ShopifyApi {
       });
   }
 
-  postProduct() {
-    return postShopifyProduct(...arguments);
+  async postProduct(newProduct) {
+    const config = structuredClone(this.config);
+    config.data = {
+      query: `mutation productCreate($input: ProductInput!) {
+          productCreate(input: $input) {
+              product {
+                  id
+                  title
+                  descriptionHtml
+              }
+              userErrors {
+                  field
+                  message
+              }
+          }
+      }`,
+      variables: {
+        input: newProduct
+      }
+    };
+    config.headers['Cookie'] = 'request_method=POST';
+    console.log('Posting Shopify product...');
+    return await axios.request(config)
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
-  updateProduct() {
+  async updateProduct() {
     return updateShopifyProduct(...arguments);
   }
 
-  updateProductPrice() {
+  async updateProductPrice() {
     return updateShopifyProductPrice(...arguments);
   }
 
-  deleteProduct() {
+  async deleteProduct() {
     return deleteShopifyProduct(...arguments);
   }
 }

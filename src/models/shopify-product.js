@@ -1,8 +1,7 @@
 class ShopifyProduct {
-  constructor(id, name, price) {
-      this.id = id;
-      this.name = name;
-      this.price = price;
+  constructor(title, descriptionHtml) {
+      this.title = title;
+      this.descriptionHtml = descriptionHtml;
   }
 }
 
