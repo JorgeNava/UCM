@@ -41,7 +41,6 @@ class CvaAPI {
 
     return await axios.request(config)
       .then((response) => {
-        console.log('[NAVA] response', response);
         return response.data;
       })
       .catch((error) => {

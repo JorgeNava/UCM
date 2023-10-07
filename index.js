@@ -6,5 +6,5 @@ const app = creatApp();
 const port = configProvider.get('port');
 
 app.listen(port, () => {
-  console.log(`[NAVA] server running at port ${port}`);
+  console.log(`Server running at port ${port}`);
 });

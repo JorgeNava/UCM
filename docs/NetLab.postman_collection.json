@@ -1,0 +1,289 @@
+{
+	"info": {
+		"_postman_id": "9aeff0ef-be55-40e3-9e84-b7cdc862eb8f",
+		"name": "NetLab",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11561154"
+	},
+	"item": [
+		{
+			"name": "UCM",
+			"item": [
+				{
+					"name": "CVA",
+					"item": [
+						{
+							"name": "Get CVA products",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{ucm-local}}/cva/products",
+									"host": [
+										"{{ucm-local}}"
+									],
+									"path": [
+										"cva",
+										"products"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Shopify",
+					"item": [
+						{
+							"name": "Get Shopify Products",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{ucm-local}}/shopify/products",
+									"host": [
+										"{{ucm-local}}"
+									],
+									"path": [
+										"shopify",
+										"products"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "CTI",
+					"item": [
+						{
+							"name": "Get Auth Token",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{ucm-local}}/cti/getAuthToken",
+									"host": [
+										"{{ucm-local}}"
+									],
+									"path": [
+										"cti",
+										"getAuthToken"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Products",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{ucm-local}}/cti/products",
+									"host": [
+										"{{ucm-local}}"
+									],
+									"path": [
+										"cti",
+										"products"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Authorized",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{ucm-local}}/auth",
+							"host": [
+								"{{ucm-local}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pull All Products",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{ucm-local}}/ucm/pullAllProducts",
+							"host": [
+								"{{ucm-local}}"
+							],
+							"path": [
+								"ucm",
+								"pullAllProducts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CT Internacional",
+			"item": [
+				{
+					"name": "Get auth token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"fer@calcasparamaquinaria.mx\",\n    \"cliente\": \"GDL3655\",\n    \"rfc\": \"LITL0309052U4\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://connect.ctonline.mx:3001/cliente/token",
+							"protocol": "http",
+							"host": [
+								"connect",
+								"ctonline",
+								"mx"
+							],
+							"port": "3001",
+							"path": [
+								"cliente",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Shopify",
+			"item": [
+				{
+					"name": "Shopify get products",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Shopify-Access-Token",
+								"value": "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",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "{\n    products(first: 10) {\n        edges {\n            node {\n                title\n            }\n        }\n    }\n}",
+								"variables": "{}"
+							}
+						},
+						"url": {
+							"raw": "https://4d9b75.myshopify.com/admin/api/2023-07/graphql.json",
+							"protocol": "https",
+							"host": [
+								"4d9b75",
+								"myshopify",
+								"com"
+							],
+							"path": [
+								"admin",
+								"api",
+								"2023-07",
+								"graphql.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Shopify post product",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Shopify-Access-Token",
+								"value": "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",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation {\n    productCreate(input: {\n        title: \"Producto de prueba desde API\", \n        productType: \"Snowboard\", \n        vendor: \"JadedPixel\"\n    }) \n    {\n        product {\n            id\n        }\n    }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "https://4d9b75.myshopify.com/admin/api/2023-07/graphql.json",
+							"protocol": "https",
+							"host": [
+								"4d9b75",
+								"myshopify",
+								"com"
+							],
+							"path": [
+								"admin",
+								"api",
+								"2023-07",
+								"graphql.json"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CVA",
+			"item": [
+				{
+					"name": "CVA get products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://www.grupocva.com/catalogo_clientes_xml/lista_precios.xml?cliente=73777",
+							"protocol": "http",
+							"host": [
+								"www",
+								"grupocva",
+								"com"
+							],
+							"path": [
+								"catalogo_clientes_xml",
+								"lista_precios.xml"
+							],
+							"query": [
+								{
+									"key": "cliente",
+									"value": "73777"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "ucm-local",
+			"value": "htpp://localhost:3000/api",
+			"type": "string"
+		}
+	]
+}

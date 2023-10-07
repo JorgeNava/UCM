@@ -23,6 +23,17 @@
         "url": "hola.com"
       }
     },
+    "cti": {
+      "id": "cti",
+      "enabled": true,
+      "pullEnabled": true,
+      "api": {
+        "url": "http://connect.ctonline.mx:3001",
+        "email": "fer@calcasparamaquinaria.mx",
+        "clientId": "GDL3655",
+        "rfc": "LITL0309052U4"
+      }
+    },
     "other": {
       "id": "other",
       "enabled": true,
