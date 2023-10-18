@@ -1,4 +1,3 @@
-const { get } = require('lodash');
 const ctiService = require('../services/cti.js');
 
 async function getAuthToken() {

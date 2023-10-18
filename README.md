@@ -34,3 +34,4 @@ TO-DO:
   - CVA
   - CTI
 - Design how to manage products conflicts
+- Desing how to set default values for products when they dont come with it.

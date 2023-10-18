@@ -14,6 +14,4 @@ async function pullSupplierProducts(supplierConfig, Adapter) {
   return [];
 }
 
-module.exports = {
-  pullSupplierProducts
-}
+module.exports = pullSupplierProducts;

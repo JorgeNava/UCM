@@ -9,8 +9,14 @@ class CtiAdapter {
   }
 
   async getProducts() {
-    const data = await CtiController.getProducts();
-    return data.map(item => new ShopifyProduct(item.codigo, this.config.defaultDescription));
+    let data = await CtiController.getProducts();
+    
+    data = [data[0]];
+
+    return data.map(item => {
+      // TODO: HANDLE CORRECTLY DEFAULT VALUES
+      new ShopifyProduct(item.codigo, this.config.defaultDescription)
+    });
   }
 }
 

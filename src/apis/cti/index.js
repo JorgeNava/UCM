@@ -33,28 +33,15 @@ class CtiAPI {
       "rfc": authRfc
     }
 
-    const AUTH_RESPONSE_SAMPLE = {
-      "x-auth": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ODZkNTM5MmY1ZmYwZjQ5NTcwOTk5ZjYiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNDgzNTU5OTM0fQ.lHoLBCLDYiM6jmgnxTdj0v5GGB8jkpiJtZF2Obyh9X4",
-      "time": "2022-02-28T19:12:47.378Z"
-    }
+    const response = await axios.request(config);
 
-    /* 
-      return await axios.request(config)
-        .then((response) => {
-          console.log('[NAVA] response', response);
-          return response.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    */
-
-    if (get(AUTH_RESPONSE_SAMPLE, 'errorCode', false)) {
+    if (get(response, 'errorCode', false)) {
       // TODO: HANDLE FALIED AUTHENTICATION.
+      console.log('[ERROR] While getting CTI auth token', response.errorCode);
       configProvider.set('suppliers.cti.enabled', false);
     }
 
-    const apiAuthToken = get(AUTH_RESPONSE_SAMPLE, 'x-auth');
+    const apiAuthToken = get(response, 'data.token');
     this.config.headers['x-auth'] = apiAuthToken;
     return apiAuthToken;
   }
@@ -65,51 +52,14 @@ class CtiAPI {
     config.url = `${config.baseUrl}/existencia/promociones`;
     delete config.baseUrl;
 
-    const PRODUCT_RESPONSE_SAMPLE = [
-      {
-        "precio": 6.14,
-        "moneda": "USD",
-        "almacenes": [
-          {
-            "promocion": {
-              "precio": 5.37,
-              "vigente": {
-                "ini": "2019-01-19T07:00:00.000Z",
-                "fin": "2019-02-01T07:00:00.000Z"
-              }
-            },
-            "14A": 2
-          },
-          {
-            "promocion": {
-              "precio": 5.37,
-              "vigente": {
-                "ini": "2019-01-19T07:00:00.000Z",
-                "fin": "2019-02-01T07:00:00.000Z"
-              }
-            },
-            "46A": 2
-          }
-        ],
-        "codigo": "ACCBLC010"
-      }
-    ];
-    /*     
-      return await axios.request(config)
-        .then((response) => {
-          console.log('[NAVA] response', response);
-          return response.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        }); 
-    */
+    const response = await axios.request(config);
 
-    if (get(PRODUCT_RESPONSE_SAMPLE, 'errorCode', false)){
+    if (get(response, 'errorCode', false)){
       // TODO: HANDLE FALIED AUTHENTICATION.
     }
-    
-    return PRODUCT_RESPONSE_SAMPLE;
+
+    const products = response.data;
+    return products;
   }
 
 }

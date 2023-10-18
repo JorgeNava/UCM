@@ -8,6 +8,7 @@ const {
 } = require('./constants.js');
 
 const configProvider = require('../../lib/config-provider/index.js');
+const isCatalogAvailable = require('./isCatalogAvailable.js');
 /*
   # CVA API - https://www.grupocva.com/api/docs/documentationWebService.html#CONSULTAS
   You can determine if you want the XML service to show the complete catalog of products or only the products that are in stock in your warehouse (this warehouse is the one that corresponds to the branch where you registered) or the distribution center of your warehouse, by default the service will show all the elements.
@@ -31,21 +32,28 @@ class CvaAPI {
   }
 
   async getExistantProducts(exist = 1) {
-    console.log('Getting CVA price list...');
-    
-    const cvaClientId = configProvider.get('suppliers.cva.api.clientId');
-    const config = structuredClone(this.config);
+    const catalogAvailable = isCatalogAvailable();
 
-    config.url = config.baseUrl + `/lista_precios.xml?cliente=${cvaClientId}&exist=${exist}`;
-    delete config.baseUrl;
+    if (catalogAvailable) {
+      console.log('Getting CVA price list...');
 
-    return await axios.request(config)
-      .then((response) => {
-        return response.data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      const cvaClientId = configProvider.get('suppliers.cva.api.clientId');
+      const config = structuredClone(this.config);
+
+      config.url = config.baseUrl + `/lista_precios.xml?cliente=${cvaClientId}&exist=${exist}`;
+      delete config.baseUrl;
+
+      return await axios.request(config)
+        .then((response) => {
+          return response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      console.log('CVA price list is not available...');
+      return {error: 'CVA price list is not available...'}
+    }
   }
 
 }
